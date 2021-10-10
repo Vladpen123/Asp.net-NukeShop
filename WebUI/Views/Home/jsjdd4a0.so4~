@@ -1,0 +1,50 @@
+﻿@model IndexViewModel
+
+@{
+    ViewBag.Title = "Главная";
+
+}
+
+<div class="row row-cols-1 row-cols-md-3 text-center">
+    <div class="col-2">
+        <form method="get">
+            <div class="align-self-lg-stretch">
+                <input name="name" value="@Model.FilterViewModel.SelectedName" placeholder="Название" class="form-control" />
+                <div class="d-flex flex-column">
+                    Категория
+                    <select name="category" asp-items="Model.FilterViewModel.Categories" placeholder="Категория" class="form-control"></select>
+                </div>
+                <div class="d-flex flex-column">
+                    Производитель
+                    <select name="manufacturer" asp-items="Model.FilterViewModel.Manufacturers" class="form-control"></select>
+                </div>
+                <input type="submit" value="Поиск" class="btn btn-outline-dark" />
+            </div>
+        </form>
+    </div>
+    <div class="col-10">
+        <div class="card-deck">
+            @foreach (var g in Model.Goods)
+            {
+            <div class="col-sm-3 p-0">
+                <div class="card">
+                    <img class="card-img-top" src="@g.PhotoPath" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+
+</div>
+<div class="d-flex justify-content-center sticky-top">
+    <page-link page-model="Model.PageViewModel" page-action="Index"
+               page-url-name="@(Model.FilterViewModel.SelectedName)"
+               page-url-company="@(Model.FilterViewModel.SelectedCategory)"
+               page-url-manufacturer="@(Model.FilterViewModel.SelectedManufacturer)"
+               page-url-sortorder="@(Model.SortViewModel.Current)"></page-link>
+</div>

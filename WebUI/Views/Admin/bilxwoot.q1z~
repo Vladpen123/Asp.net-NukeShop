@@ -1,0 +1,106 @@
+﻿
+
+@model IndexViewModel
+
+@{
+    ViewBag.Title = "Index";
+
+    int counter = 0;
+}
+
+<div>
+    <a asp-action="CreateGood" class="btn btn-primary">Добавить новый товар</a>
+</div>
+<hr />
+
+<div class="row">
+    <div class="col-2">
+        <div class="row">
+
+            <div class="col-9">
+                <form method="get">
+                    <div class="align-self-lg-stretch">
+                        <input name="name" value="@Model.FilterViewModel.SelectedName" placeholder="Название" class="form-control" />
+                        <div class="d-flex flex-column">
+                            Категория
+                            <select name="category" asp-items="Model.FilterViewModel.Categories" placeholder="Категория" class="form-control"></select>
+                        </div>
+                        <div class="d-flex flex-column">
+                            Производитель
+                            <select name="manufacturer" asp-items="Model.FilterViewModel.Manufacturers" class="form-control"></select>
+                        </div>
+                        <input type="submit" value="Фильтр" class="btn btn-outline-dark" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-9">
+        <table class="table table-responsive-xl">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>Артикул</th>
+                    <th>Название</th>
+                    <th>Пол</th>
+                    <th>Цена</th>
+                    <th>Производитель</th>
+                    <th>Категория</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var g in Model.Goods)
+                {
+                    <tr>
+                        <td>
+                            @{counter++;}
+                            @counter
+                        </td>
+                        <td>
+                            <img src="@g.PhotoPath" style="width: 80px; height: 80px" />
+                        </td>
+                        <td>@g.Code</td>
+                        <td>@g.Name</td>
+                        @switch (g.Gender)
+                        {
+                            case "Male":
+                                <td>Для мужчин</td>
+                                break;
+                            case "Female":
+                                <td>Для женщин</td>
+                                break;
+                            case "Kids":
+                                <td>Для детей</td>
+                                break;
+                            default:
+                                break;
+                        }
+                        <td>@g.Price.ToString("C")</td>
+                        <td>@g.ManufacturerName</td>
+                        <td>@g.CategoryName</td>
+                        <td>
+                            <div class="btn-group btn-group-sm btn-group-vertical">
+                                <a asp-action="DetailsGood" class="btn btn-info" asp-route-id="@g.Id">Подробнее</a>
+                                <a asp-action="EditGood" class="btn btn-warning" asp-route-id="@g.Id">Изменить</a>
+                                <a asp-action="DeleteGood" class="btn btn-danger" asp-route-id="@g.Id">Удалить</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+<div class="d-flex justify-content-center">
+    <page-link page-model="Model.PageViewModel" page-action="Index"
+           page-url-name="@(Model.FilterViewModel.SelectedName)"
+           page-url-company="@(Model.FilterViewModel.SelectedCategory)"
+           page-url-manufacturer="@(Model.FilterViewModel.SelectedManufacturer)"
+           page-url-sortorder="@(Model.SortViewModel.Current)"></page-link>
+</div>

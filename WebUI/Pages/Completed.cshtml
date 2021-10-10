@@ -1,0 +1,20 @@
+﻿@page
+
+@{
+    Layout = "_CompLayout";
+}
+@{
+    var rand = new Random();
+    int OrderId = rand.Next(1, 321321);
+}
+
+<div class="text-center">
+    <h2>Благодарим за покупку!</h2>
+    <p>Спасибо заваш заказ №@OrderId</p>
+    <p>Оператор свяжется с вами по телефону в ближайшее время для уточнее деталей доставки.</p>
+    <a class="btn btn-primary" asp-controller="Home">Return to Store</a>
+</div>
+
+
+
+

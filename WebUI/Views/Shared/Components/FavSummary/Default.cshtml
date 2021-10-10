@@ -1,0 +1,22 @@
+﻿@model Favorites
+
+<div>
+
+
+    @if (Model.Lines.Count() > 0)
+    {
+    <a asp-page="/Favorites"
+       asp-route-returnurl="@ViewContext.HttpContext.Request.PathAndQuery()">
+        <i class="bi bi-heart-fill" style="color:orangered; font-size:24px"></i>
+        <span class="badge badge-warning" style="font-size:12px;" id="favCount">@Model.Lines.Count()</span>
+    </a>
+    }
+    else
+    {
+<a asp-page="/Favorites"
+   asp-route-returnurl="@ViewContext.HttpContext.Request.PathAndQuery()"
+   data-container="body" data-toggle="popover" data-placement="bottom" data-content="asdds">
+    <i class="bi bi-heart" style="font-size: 26px; color: #cbd3da"></i>
+</a>
+    }
+</div>

@@ -1,0 +1,72 @@
+﻿@model IEnumerable<BLL.DTO.ManufacturerDTO>
+
+@{
+    ViewBag.Title = "Производители";
+    Layout = "_AdminLayout";
+    int counter = 0;
+}
+<div class="container">
+
+    <a class="btn btn-primary popup text-light" data-url="Admin/CreateManufacturer/" data-toggle="modal"
+       data-target="#modal-create-manufacturer"><i class="bi bi-plus" style="font-size: 20px"></i> Добавить нового производителя </a>
+    <partial name="_CreateManufacturer" model="new ManufacturerViewModel()" />
+
+    <table class="table table-responsive-lg">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Название</th>
+                <th>Список товаров</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var m in Model)
+            {
+                <tr>
+                    <td>
+                        @{counter++;}
+                        @counter
+                    </td>
+                    <td>@m.Name</td>
+                    <td>
+                        @if (@m.Goods.Count() != 0)
+                        {
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-outline-info dropdown-toggle"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                        style="width:150px">
+                                    Товары (@m.Goods.Count())
+                                </button>
+
+                                <div class="dropdown-menu ">
+                                    @foreach (var g in m.Goods)
+                                    {
+                                        <a class="dropdown-item dropdown-item-text" asp-action="DetailsGood" asp-route-id="@g.Id">@g.Name</a>
+                                    }
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <button type="button" class="btn btn-outline-info dropdown-toggle "
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                    style="width:150px">
+                                Товары (@m.Goods.Count())
+                            </button>
+                        }
+                    </td>
+
+                    <td>
+                        <div class="btn-group btn-group">
+                            <a asp-action="EditManufacturer" class="btn btn-warning" asp-route-id="@m.Id">Изменить</a>
+
+                            <a class="btn btn-danger popup" data-url="Admin/DeleteManufacturer/{@m.Id}" data-toggle="modal"
+                               data-target="#modal-confirm-delete-manufacturer-@m.Id">Удалить <i class="fa fa-trash"></i></a>
+                            <partial name="_DeleteManufacturer" model="@m" />
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

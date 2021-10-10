@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - WebUI</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link href="/lib/font-awesome/css/all.min.css" rel="stylesheet" />
+
+
+
+    <link rel="stylesheet" href="/Adara/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/Adara/css/animate.min.css">
+    <link rel="stylesheet" href="/Adara/css/magnific-popup.css">
+    <link rel="stylesheet" href="/Adara/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/Adara/css/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="/Adara/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="/Adara/css/swiper-bundle.min.css">
+    <link rel="stylesheet" href="/Adara/css/jquery-ui.min.css">
+    <link rel="stylesheet" href="/Adara/css/nice-select.css">
+    <link rel="stylesheet" href="/Adara/css/jarallax.css">
+    <link rel="stylesheet" href="/Adara/css/flaticon.css">
+    <link rel="stylesheet" href="/Adara/css/slick.css">
+    <link rel="stylesheet" href="/Adara/css/default.css">
+    <link rel="stylesheet" href="/Adara/css/style.css">
+    <link rel="stylesheet" href="/Adara/css/responsive.css">
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-light bg-black navbar-expand-sm navbar-toggleable-sm navbar-light ">
+            <div class="container-fluid">
+                <a class="navbar-brand text-nav" asp-area="" asp-controller="Home" asp-action="Index">NukeSports</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li>
+                            <div class="dropdown show">
+                                <a class="btn btn-secondary dropdown-toggle"
+                                   role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false">
+                                    Products
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" asp-controller="Admin" asp-action="Goods">Goods</a>
+                                    <a class="dropdown-item" asp-controller="Admin" asp-action="Categories">Categories</a>
+                                    <a class="dropdown-item" asp-controller="Admin" asp-action="Manufacturers">Manufacturers</a>
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li class="ml-4"><vc:fav-summary /></li>
+                        <li class="ml-4"><vc:cart-summary /></li>
+                        <li class="ml-4"><partial name="_LoginPartial" /></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <nav class="navbar navbar-light bg-dark navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+
+            </div>
+        </nav>
+    </header>
+    <div class="container-fluid">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2021 - WebUI - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script src="/Adara/js/vendor/jquery-3.5.0.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/isotope.pkgd.min.js"></script>
+    <script src="js/imagesloaded.pkgd.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="js/bootstrap-datepicker.min.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="js/jquery.countdown.min.js"></script>
+    <script src="js/swiper-bundle.min.js"></script>
+    <script src="js/jarallax.min.js"></script>
+    <script src="js/slick.min.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="/Adara/js/nav-tool.js"></script>
+    <script src="/Adara/js/plugins.js"></script>
+    <script src="/Adara/js/main.js"></script>
+
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

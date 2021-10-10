@@ -1,0 +1,193 @@
+﻿
+
+@model StoreViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "_AdminLayout";
+}
+
+<div class="row">
+    <div class="col-2">
+        <div class="row">
+
+            <div class="ml-2 col-10">
+                <div>
+
+
+                    <a class="btn btn-block btn-primary popup text-light" data-url="Admin/CreateGood/" data-toggle="modal"
+                       data-target="#modal-create-good">Добавить новый товар <i class="fa fa-trash"></i></a>
+                    <partial name="_CreateGood" model="new GoodViewModel()" />
+                    <hr />
+                </div>
+
+                <form method="get">
+                    <div class="align-self-stretch">
+                        <div class="pb-2">
+                            <input name="name" value="@Model.FilterViewModel.SelectedName"
+                                   placeholder="Название" class="form-control" />
+                        </div>
+                        <div class="pb-2">
+                            <input name="code" value="@Model.FilterViewModel.SelectedCode"
+                                   placeholder="Артикул" class="form-control" />
+                        </div>
+
+                        <div>
+                            <div class="d-flex flex-column pb-2">
+                                <div class="pb-2">Категория</div>
+                                <select name="category" asp-items="Model.FilterViewModel.Categories" placeholder="Категория" class="form-control"></select>
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-column pb-2">
+                            <div class="">Производитель</div>
+                            <select name="manufacturer" asp-items="Model.FilterViewModel.Manufacturers" class="form-control"></select>
+                        </div>
+                        <div class="">Пол</div>
+                        <div class="pb-2">
+                            <select name="gender" asp-items="@Html.GetEnumSelectList<Gender>().Reverse()" class="form-control">
+                                <option value="@null">Все</option>
+                            </select>
+                        </div>
+                        <div class="d-flex justify-content-lg-center">
+                            <input type="submit" value="Поиск" class=" btn btn-block btn-outline-dark" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <div class="pl-0 col-9">
+        <table class="table table-borderless">
+            <thead class="thead-dark">
+                <tr>
+                    <th></th>
+                    <th>
+
+                        <a class="text-light dropdown-toggle"
+                           asp-action="Goods"
+                           asp-route-sort="@(Model.SortViewModel.CodeSort)"
+                           asp-route-code="@Model.FilterViewModel.SelectedCode">
+                            Артикул
+                        </a>
+                    </th>
+                    <th>
+                        <a class="text-light dropdown-toggle"
+                           asp-action="Goods"
+                           asp-route-sort="@(Model.SortViewModel.NameSort)"
+                           asp-route-name="@Model.FilterViewModel.SelectedName">
+                            Название
+                        </a>
+                    </th>
+  
+                    <th>
+                        <a class="text-light dropdown-toggle"
+                           asp-action="Goods"
+                           asp-route-sort="@(Model.SortViewModel.GenderSort)"
+                           asp-route-gender="@Model.FilterViewModel.SelectedGender">
+                            Пол
+                        </a>
+                    </th>
+                    <th>
+                        <a class="text-light dropdown-toggle"
+                           asp-action="Goods"
+                           asp-route-sort="@(Model.SortViewModel.PriceSort)"
+                           asp-route-name="@Model.FilterViewModel.SelectedName">
+                            Цена
+                        </a>
+                    </th>
+                    <th>
+                        <a class="text-light dropdown-toggle"
+                           asp-action="Goods"
+                           asp-route-sort="@(Model.SortViewModel.ManufacturerSort)"
+                           asp-route-manufacturer="@Model.FilterViewModel.SelectedManufacturer">
+                            Производитель
+                        </a>
+                    </th>
+                    <th>
+                        <a class="text-light dropdown-toggle"
+                           asp-action="Goods"
+                           asp-route-sort="@(Model.SortViewModel.CategorySort)"
+                           asp-route-category="@Model.FilterViewModel.SelectedCategory">
+                            Категория
+                        </a>
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var g in Model.Goods)
+                {
+                <tr>
+
+                    <td>
+                        <img src="@g.PhotoPath" style="width: 80px; height: 80px" />
+                    </td>
+                    <td>@g.Code</td>
+                    <td>@g.Name</td>
+                    @switch (g.Gender)
+                    {
+                        case 0:
+                            <td>Для мужчин</td>
+                            break;
+                        case 1:
+                            <td>Для женщин</td>
+                            break;
+                        case 2:
+                            <td>Для детей</td>
+                            break;
+                        default:
+                            break;
+                    }
+                    <td>@g.Price.ToString("C")</td>
+                    <td>@g.ManufacturerName</td>
+                    <td>@g.CategoryName</td>
+                    <td class="pr-0">
+                        <div class="btn-group btn-group-sm float-right btn-group-vertical">
+                            <a asp-action="DetailsGood" class="btn btn-secondary" asp-route-id="@g.Id">Подробнее</a>
+
+                            <a class="btn btn-block btn-warning popup text-light" data-url="Admin/EditGood/" data-toggle="modal"
+                               data-target="#modal-edit-good-@g.Id">Изменить <i class="fa fa-trash"></i></a>
+                            <partial name="_EditGood" model="new GoodViewModel { Id=g.Id, CategoryId=g.CategoryId,Gender=g.Gender,Code=g.Code,
+  Count=g.Count, Desc=g.Desc,ManufacturerId=g.ManufacturerId,Name=g.Name,Price=g.Price}" />
+
+
+                            <a class="btn btn-danger popup" data-url="Admin/DeleteGood/{@g.Id}" data-toggle="modal"
+                               data-target="#modal-confirm-delete-good-@g.Id" id="@g.Id">Удалить <i class="fa fa-trash"></i></a>
+                            <partial name="_DeleteGood" model="@g" />
+
+                        </div>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<hr />
+
+
+
+
+
+
+<div class="d-flex justify-content-center sticky-top">
+    <page-link page-model="Model.PageViewModel" page-action="Goods"
+               page-url-name="@(Model.FilterViewModel.SelectedName)"
+               page-url-gender="@(Model.FilterViewModel.SelectedCategory)"
+               page-url-category="@(Model.FilterViewModel.SelectedCategory)"
+               page-url-manufacturer="@(Model.FilterViewModel.SelectedManufacturer)"
+               page-url-code="@(Model.FilterViewModel.SelectedCategory)"
+               page-url-sort="@(Model.SortViewModel.Current)"></page-link>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+
+
+

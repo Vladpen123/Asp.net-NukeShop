@@ -1,0 +1,81 @@
+﻿@model GoodDTO
+
+@{
+    ViewData["Title"] = $"{@Model.CategoryName} {@Model.ManufacturerName} {@Model.Name} {@Model.Code}";
+    Layout = "_AdminLayout";
+}
+
+<div class="row">
+    <div class="col-8">
+        <dl class="dl-horizontal">
+            <dt>Название</dt>
+            <dd>
+                @Model.Name
+            </dd>
+
+            <dt>Артикул</dt>
+            <dd>
+                @Model.Code
+            </dd>
+
+            <dt>Артикул</dt>
+            <dd>
+                @Model.Count
+            </dd>
+
+            <dt>Цена</dt>
+            <dd>
+                @Model.Price.ToString("C")
+            </dd>
+
+            <dt>Описание</dt>
+            <dd>
+                <b>УПРУГОСТЬ, КОМФОРТ И ИДЕАЛЬНАЯ ПОСАДКА </b><br />
+                Кроссовки <strong> @Model.ManufacturerName @Model.Name</strong> с упругой подошвой из пеноматериала,
+                как в предыдущей версии, обеспечивают амортизацию при каждом шаге.
+                Прочный верх из дышащей сетки с более широкой посадкой в области носка обеспечивает комфорт.
+                Старое и новое. Более широкая передняя часть дает дополнительное пространство для пальцев.
+                Классическая посадка обеспечивает тот уровень комфорта, который ты ожидаешь от Pegasus.Верх выполнен из воздухопроницаемой мягкой сетки. Эластичная конструкция дает оптимальную форму и посадку.
+                Амортизация при каждом шаге. Легкий пеноматериал Nike React обеспечивает упругость и прочность
+                <br />
+                <b>Преимущества </b>
+                <ul>
+                    <li>Больше пеноматериала в язычке для мягкости в верхней части стопы.</li>
+                    <li>Увеличенное количество пеноматериала повышает эффективность амортизации без лишнего объема.</li>
+                    <li>Подушка Zoom Air усиливает отскок при каждом шаге. Она расположена ближе к стопе для дополнительной амортизации.</li>
+                    <li> Надежная посадка. Плетение в средней части стопы обеспечивает плотную посадку при затягивании шнурков.</li>
+                </ul>
+                <b>Информация о товаре</b>
+                <ul>
+                    <li>Верх: синтетический материал / текстиль</li>
+                    <li>Верх: синтетический материал / текстиль</li>
+                    <li>Внутренний материал: текстиль</li>
+                    <li>Подошва: пена / резина</li>
+                </ul>
+            </dd>
+
+            <dt>Пол</dt>
+            <dd>
+                @Model.Gender
+            </dd>
+
+        </dl>
+    </div>
+    <div class="col-4">
+        <div>
+           
+            <div class="d-flex flex-column" style="width:400px">
+             
+                        <img src="@Model.PhotoPath" class="rounded d-flex align-self-center" style="max-height: 400px; max-width:400px"  />
+                        <div class="d-flex justify-content-lg-around"  style="width:400px">
+                            <a asp-action="EditGood" class="btn btn-warning" asp-route-id="@Model.Id">Изменить</a>
+                            <a asp-action="DeleteGood" class="btn btn-danger" asp-route-id="@Model.Id">Удалить</a>
+                        </div>
+                            
+                </div>
+            </div>
+        
+        </div>
+
+
+</div>

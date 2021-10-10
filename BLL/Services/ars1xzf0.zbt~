@@ -1,0 +1,29 @@
+﻿using AutoMapper;
+using BLL.DTO;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BLL.Services
+{
+    public class GoodService : IGoodService
+    {
+        IMapper mapper;
+
+        public GoodService()
+        {
+            var config = new MapperConfiguration(cfg => 
+            { 
+                cfg.CreateMap<Good, GoodDTO>
+            });
+        }
+
+
+        public Task<IEnumerable<GoodDTO>> GetGoods()
+        {
+            
+        }
+    }
+}

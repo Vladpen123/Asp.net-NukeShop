@@ -1,0 +1,101 @@
+﻿
+@model GoodViewModel
+
+    <div aria-hidden="true" aria-labelledby="modal-create-good-label"
+         role="dialog" tabindex="-1" id="modal-create-good" class="modal fade">
+        <div class="modal-dialog">
+
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5>Добавить новый товар</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+
+                <form novalidate asp-antiforgery="true" asp-action="CreateGood" method="post" class="needs-validation" enctype="multipart/form-data">
+                    <div class="modal-body ">
+
+                        <div class="form-group">
+
+                            <input type="hidden" asp-for="Id" />
+
+
+
+                            <label asp-for="Name" class="col-form-label">Название</label>
+                            <input asp-for="Name" class="form-control" placeholder="Название" required />
+                            <div>
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+
+                            <label asp-for="Code">Артикул</label>
+                            <input asp-for="Code" class="form-control" placeholder="Артикул" required />
+                            <div>
+                                <span asp-validation-for="Code" class="text-danger"></span>
+                            </div>
+
+
+                            <label asp-for="Price">Цена</label>
+                            <input asp-for="Price" class="form-control" placeholder="Цена" required />
+                            <div>
+                                <span asp-validation-for="Price" class="text-danger"></span>
+                            </div>
+
+                            <label asp-for="Desc">Описание</label>
+                            <textarea asp-for="Desc" class="form-control" aria-label="With textarea"></textarea>
+
+
+                            <label asp-for="Count">Количество</label>
+                            <input asp-for="Count" min="0" class="form-control" placeholder="Количество" required />
+                            <div>
+                                <span asp-validation-for="Count" class="text-danger"></span>
+                            </div>
+
+                            <label asp-for="PhotoPath">Фото</label>
+                            <div class="custom-file">
+                                <input type="file" asp-for="PhotoPath" class="custom-file-input" id="inputGroupFile01" required />
+                                <label class="custom-file-label" for="inputGroupFile01">Выберите файл...</label>
+                            </div>
+                            <div>
+                                <span asp-validation-for="PhotoPath" class="text-danger"></span>
+                            </div>
+
+                            <label>Пол</label>
+                            <select asp-for="Gender" asp-items="@Html.GetEnumSelectList<Gender>()" class="custom-select" required></select>
+                            <div>
+                                <span asp-validation-for="Gender" class="text-danger"></span>
+                            </div>
+
+                            <label>Категория</label>
+                            <select asp-for="CategoryId" asp-items="@ViewBag.Cats" class="custom-select" required></select>
+                            <div>
+                                <span asp-validation-for="CategoryId" class="text-danger"></span>
+                            </div>
+
+                            <label>Производитель</label>
+                            <select asp-for="ManufacturerId" asp-items="@ViewBag.Mans" class="custom-select" required></select>
+                            <div>
+                                <span asp-validation-for="ManufacturerId" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Добавить товар</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Отмена</span></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+
+
+
+

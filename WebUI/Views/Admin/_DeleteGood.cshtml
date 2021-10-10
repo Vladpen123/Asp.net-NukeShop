@@ -1,0 +1,24 @@
+﻿@model GoodDTO
+<div aria-hidden="true" aria-labelledby="modal-confirm-delete-good-label"
+     role="dialog" tabindex="-1" id="modal-confirm-delete-good-@Model.Id" class="modal fade">
+    <div class="modal-dialog">
+
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Подтверждение удаления</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
+            <form asp-action="DeleteGood" asp-controller="Admin" asp-route-id="@Model.Id" method="post" enctype="multipart/form-data">
+
+                <div class="modal-body ">
+                    Вы действительно хотите удалить @Model.Name?
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger" type="submit">Удалить</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Отмена</span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+C:\C#\WebShop\DAL\bin\Debug\net5.0\DAL.deps.json
+C:\C#\WebShop\DAL\bin\Debug\net5.0\DAL.runtimeconfig.json
+C:\C#\WebShop\DAL\bin\Debug\net5.0\DAL.runtimeconfig.dev.json
+C:\C#\WebShop\DAL\bin\Debug\net5.0\DAL.dll
+C:\C#\WebShop\DAL\bin\Debug\net5.0\ref\DAL.dll
+C:\C#\WebShop\DAL\bin\Debug\net5.0\DAL.pdb
+C:\C#\WebShop\DAL\obj\Debug\net5.0\DAL.csproj.AssemblyReference.cache
+C:\C#\WebShop\DAL\obj\Debug\net5.0\DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\C#\WebShop\DAL\obj\Debug\net5.0\DAL.AssemblyInfoInputs.cache
+C:\C#\WebShop\DAL\obj\Debug\net5.0\DAL.AssemblyInfo.cs
+C:\C#\WebShop\DAL\obj\Debug\net5.0\DAL.csproj.CoreCompileInputs.cache
+C:\C#\WebShop\DAL\obj\Debug\net5.0\DAL.dll
+C:\C#\WebShop\DAL\obj\Debug\net5.0\ref\DAL.dll
+C:\C#\WebShop\DAL\obj\Debug\net5.0\DAL.pdb
+C:\C#\WebShop\DAL\obj\Debug\net5.0\DAL.genruntimeconfig.cache

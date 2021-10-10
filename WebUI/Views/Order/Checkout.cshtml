@@ -1,0 +1,79 @@
+﻿@model Order
+<h2>Оформление заказа</h2>
+
+
+
+<div class="row">
+    <div class="col-6">
+        <form method="post" asp-action="Checkout">
+            <div class="form-group">
+
+                <input class="form-control" asp-for="Id" type="hidden" />
+                <div>
+                    <div class="col-form-label">Фамилия</div>
+                    <input class="form-control" asp-for="Surname" />
+                    <div>
+                        <span asp-validation-for="Surname" class="text-danger"></span>
+                    </div>
+                </div>
+                <div>
+                    <div class="col-form-label">Имя</div>
+                    <input class="form-control" asp-for="Name" />
+                    <div>
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+                <div>
+                    <div class="col-form-label">Отчество</div>
+                    <input class="form-control" asp-for="Patronim" />
+                    <div>
+                        <span asp-validation-for="Patronim" class="text-danger"></span>
+                    </div>
+                </div>
+                <div>
+                    <div class="col-form-label">Адрес доставки</div>
+                    <input class="form-control" asp-for="Address" />
+                    <div>
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+                </div>
+                <br />
+                <div>
+                    <input type="submit" class="btn btn-orange" />
+                </div>
+                
+            </div>
+        </form>
+    </div>
+    <div class="col-6">
+      
+        <h4>
+            Товары в заказе
+        </h4>
+          
+          
+        <ul>
+            @foreach (var l in Model.Lines)
+            {
+                <li>
+                    <div class="row">
+                        <div class="col-2">
+                            <img class="img-thumbnail" src="@l.Good.PhotoPath"/>
+                        </div>
+                        <div class="col-10">
+                            <div class="flex-column">
+                               
+                                <div>  @l.Good.ManufacturerName @l.Good.Name</div>
+                                <div>  @l.Good.Code</div>
+                                <div> Количество: @l.Quantity</div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                </li>
+
+            }
+
+        </ul>
+    </div>
+</div>

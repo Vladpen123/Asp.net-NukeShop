@@ -1,0 +1,42 @@
+﻿@page
+@model WebUI.Pages.FavoritesModel
+@{
+    Layout = "_CartLayout";
+}
+
+<h2>Your cart</h2>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Название</th>
+            <th class="text-right">Цена</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var line in Model.Favorites.Lines)
+        {
+            <tr>
+                <td class="text-left">@line.Good.Name</td>
+                <td class="text-right">@line.Good.Price.ToString("c")</td>
+
+                <td class="text-center">
+                    <form asp-page-handler="Remove" method="post">
+                        <input type="hidden" name="id"
+                               value="@line.Good.Id" />
+                        <input type="hidden" name="returnUrl"
+                               value="@Model.ReturnUrl" />
+                        <button type="submit" class="btn btn-sm btn-danger">
+                            Удалить
+                        </button>
+                    </form>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+
+</table>
+<div class="text-center">
+    <a class="btn btn-primary" href="@Model.ReturnUrl">Вернуться назад</a>
+</div>

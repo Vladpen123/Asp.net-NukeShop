@@ -1,0 +1,198 @@
+﻿@model GoodDTO
+
+@using Microsoft.AspNetCore.Identity
+
+@inject UserManager<IdentityUser> UserManager
+@inject SignInManager<IdentityUser> SignInManager
+@*TODO: ДОБАВИТЬ БРЕДКРАМБЫ*@
+
+
+@{
+    Layout = "_Layout";
+            }
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"></li>
+        <li class="breadcrumb-item active" aria-current="page">@Model.FullName</li>
+    </ol>
+</nav>
+
+
+
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-6">
+            <div class="d-flex justify-content-center">
+                <img class="img-fluid" style="width:500px; height:500px" src="@Model.PhotoPath" />
+            </div>
+        </div>
+        <div class="col-6">
+            <h6 class="title-page">
+                @Model.CategoryName @Model.ManufacturerName @Model.Name Артикул: @Model.Code
+            </h6>
+
+
+            @if (Model.Gender == 0)
+            {
+                <div class="subtitle">Для мужчин</div>
+
+            }
+            else if (Model.Gender == 1)
+            {
+                <div class="subtitle">Для женщин</div>
+            }
+            else
+            {
+                <div class="subtitle">Для детей</div>
+            }
+
+
+            <div class="d-flex justify-content-between  align-items-baseline">
+                <div class="price">@Model.Price грн.</div>
+                <div class="articul-code">
+                    Aртикул: @Model.Code
+                </div>
+            </div>
+            <div>
+                @if (!SignInManager.IsSignedIn(User))
+                {
+                    <i class="bi bi-heart"></i>
+                    <a asp-area="Identity" asp-page="/Account/Login">Избранное</a>
+                }
+                else
+                {
+                    //TO DO: Добавить список избранного по типу корзины
+                    <form method="post" asp-page="/Favorites" asp-page-handler="AddFavorite" asp-route-id="@Model.Id">
+                        <input type="hidden" name="returnUrl"
+                               value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+                        <button type="submit" class="btn btn-like" draggable="false">
+
+                            <i class="bi bi-heart"></i>
+                            Избранное
+                        </button>
+
+                    </form>
+                }
+            </div>
+            <div>
+                Выберите размер (США)
+            </div>
+            <div class="d-flex flex-lg-wrap">
+
+                @for (float i = 6f; i < 13f; i += 0.5f)
+                {
+                    //TO DO: Добавить сетку размеров
+                    <div>
+
+                        <input type="button" class="btn btn-outline-dark" style="width:60px; margin: 5px" name="size" value="@i" />
+                    </div>
+                }
+            </div>
+            <div class="d-flex justify-content-between p-4">
+                <div class="d-flex flex-column">
+                    <a class="info-link" asp-action="">Наличие в магазинах</a>
+                    <a class="info-link" asp-action="">Доставка</a>
+                    <a class="info-link" asp-action="">Возврат</a>
+                </div>
+                <div class="d-flex flex-column">
+                    <a class="info-link" asp-action="">Таблица размеров</a>
+                    <a class="info-link" asp-action="">Оплата</a>
+                    <a class="info-link" asp-action="">Написать отзыв</a>
+                </div>
+            </div>
+
+            <div class="d-flex align-items-baseline justify-content-around">
+                <form id="form" asp-page="/Cart" asp-route-id="@Model.Id" method="post">
+                    <input type="hidden" name="returnUrl"
+                           value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+
+                    <div class="d-flex align-items-baseline">
+                        <div>Количество</div>
+                        <select name="quant" class="custom-select mb-3">
+
+                            @for (int i = 1; i < 10; i++)
+                            {
+
+                                <option value="@i">@i</option>
+                            }
+                        </select>
+                    </div>
+                </form>
+                <button type="submit" form="form" class="btn btn-orange">Добавить в корзину</button>
+            </div>
+        </div>
+
+        @if (Model.CategoryName == "Кроссовки")
+        {
+            <div class="p-3">
+                <h4 class="subtitle-page">
+                    @Model.CategoryName @Model.ManufacturerName @Model.Name Артикул: @Model.Code
+                </h4>
+
+                <b>УПРУГОСТЬ, КОМФОРТ И ИДЕАЛЬНАЯ ПОСАДКА </b><br />
+                Кроссовки <strong> @Model.ManufacturerName @Model.Name</strong> с упругой подошвой из пеноматериала,
+                как в предыдущей версии, обеспечивают амортизацию при каждом шаге.
+                Прочный верх из дышащей сетки с более широкой посадкой в области носка обеспечивает комфорт.
+                Старое и новое. Более широкая передняя часть дает дополнительное пространство для пальцев.
+                Классическая посадка обеспечивает тот уровень комфорта, который ты ожидаешь от Pegasus.Верх выполнен из воздухопроницаемой мягкой сетки. Эластичная конструкция дает оптимальную форму и посадку.
+                Амортизация при каждом шаге. Легкий пеноматериал Nike React обеспечивает упругость и прочность
+                <br />
+                <b>Преимущества </b>
+                <ul>
+                    <li>Больше пеноматериала в язычке для мягкости в верхней части стопы.</li>
+                    <li>Увеличенное количество пеноматериала повышает эффективность амортизации без лишнего объема.</li>
+                    <li>Подушка Zoom Air усиливает отскок при каждом шаге. Она расположена ближе к стопе для дополнительной амортизации.</li>
+                    <li> Надежная посадка. Плетение в средней части стопы обеспечивает плотную посадку при затягивании шнурков.</li>
+                </ul>
+                <b>Информация о товаре</b>
+                <ul>
+                    <li>Верх: синтетический материал / текстиль</li>
+                    <li>Верх: синтетический материал / текстиль</li>
+                    <li>Внутренний материал: текстиль</li>
+                    <li>Подошва: пена / резина</li>
+                </ul>
+            </div>
+
+        }
+    </div>
+</div>
+
+
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+    <script>
+        var myModal = new bootstrap.Modal(document.getElementById('myModal'), {
+            keyboard: false
+        })
+    </script>
+}

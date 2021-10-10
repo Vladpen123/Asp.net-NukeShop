@@ -1,0 +1,42 @@
+﻿@model CategoryViewModel
+
+@{
+
+}
+
+
+<div aria-hidden="true" aria-labelledby="modal-edit-category-label-@Model.Id"
+     role="dialog" tabindex="-1" id="modal-edit-category-@Model.Id" class="modal fade">
+    <div class="modal-dialog">
+
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Изменить категорию</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
+
+
+            <form asp-action="EditCategory" method="post">
+                <div class="modal-body">
+                    <div class="form-group" asp-validation-summary="All">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" asp-for="Id" />
+
+                        <input type="hidden" asp-for="Goods" value="@Model.Goods" />
+
+                        <label asp-for="Name">Название</label>
+                        <input asp-for="Name" class="form-control" placeholder="Название" />
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Изменить категорию</button>
+                </div>
+
+
+            </form>
+
+        </div>
+    </div>
+</div>

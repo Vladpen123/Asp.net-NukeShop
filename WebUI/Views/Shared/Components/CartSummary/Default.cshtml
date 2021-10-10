@@ -1,0 +1,36 @@
+﻿@model Cart
+
+
+@{
+    Layout = "_CompLayout";
+
+
+}
+
+<div class="">
+    @if (Model.Lines.Count() > 0)
+    {
+
+        <a asp-page="/Cart"
+           asp-route-returnurl="@ViewContext.HttpContext.Request.PathAndQuery()">
+
+            <i class="bi bi-cart" style="font-size: 24px; color: #cbd3da">
+
+            </i>
+            <span class="badge badge-warning" id="cartCount"> @Model.Lines.Sum(x => x.Quantity)</span>
+        </a>
+
+    
+    }
+    else
+    {
+<a asp-page="/Cart"
+   asp-route-returnurl="@ViewContext.HttpContext.Request.PathAndQuery()">
+    <i class="bi bi-cart2" style="font-size:26px; color: #cbd3da">
+
+    </i>
+
+</a>
+    }
+
+</div>

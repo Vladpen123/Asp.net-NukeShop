@@ -1,0 +1,77 @@
+﻿@model IEnumerable<BLL.DTO.CategoryDTO>
+
+@{
+    ViewBag.Title = "Категории";
+
+    int counter = 0;
+    Layout = "_AdminLayout";
+}
+
+
+
+
+<div class="container">
+
+    <a class="btn btn-primary popup text-light" data-url="Admin/CreateCategory/" data-toggle="modal"
+       data-target="#modal-create-category"><i class="bi bi-plus" style="font-size: 20px"></i> Добавить новую категорию </a>
+    <partial name="_CreateCategory" model="new CategoryViewModel()" />
+
+    <table class="table table-responsive-lg">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Название</th>
+                <th>Список товаров</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var c in Model)
+            {
+                <tr>
+                    <td>
+                        @{counter++;}
+                        @counter
+                    </td>
+                    <td>@c.Name</td>
+                    <td>
+                        @if (@c.Goods.Count() != 0)
+                        {
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-outline-info dropdown-toggle" style="width:150px"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Товары (@c.Goods.Count())
+                                </button>
+
+                                <div class="dropdown-menu ">
+                                    @foreach (var g in c.Goods)
+                                    {
+                                        <a class="dropdown-item dropdown-item-text" asp-action="DetailsGood" asp-route-id="@g.Id">@g.Name</a>
+                                    }
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <button type="button" class="btn btn-outline-info dropdown-toggle " style="width:150px"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Товары (@c.Goods.Count())
+                            </button>
+                        }
+                    </td>
+
+                    <td>
+                        <div class="btn-group btn-group">
+                            <a class="btn btn-warning popup text-light" data-url="Admin/CreateCategory/{@c.Id}" data-toggle="modal"
+                               data-target="#modal-edit-category-@c.Id"><i class="bi bi-plus" style="font-size: 20px"></i> Изменить</a>
+                            <partial name="_EditCategory" model="new CategoryViewModel { Id = c.Id, Goods = c.Goods, Name=c.Name}" />
+
+                            <a class="btn btn-danger popup" data-url="Admin/DeleteCategory/{@c.Id}" data-toggle="modal"
+                               data-target="#modal-confirm-delete-category-@c.Id">Удалить <i class="fa fa-trash"></i></a>
+                            <partial name="_DeleteCategory" model="@c" />
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div> 

@@ -1,0 +1,56 @@
+﻿
+<div aria-hidden="true" aria-labelledby="modal-size-table-label"
+     role="dialog" tabindex="-1" id="modal-size-table" class="modal fade">
+    <div class="modal-dialog">
+
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Таблица размеров</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>УКРАИНА</th>
+                            <th>США</th>
+                            <th>ЕВРОПА</th>
+                            <th>СМ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (float ua = 34, us = 3, eu=35, cm=22; ua <= 46 && us<=15 && eu<=47 && cm<=33; ua += 0.5f, us += 0.5f, eu+=0.5f, cm+=0.5f)
+                        {
+                        <tr>
+                            <td>@ua</td>
+                            <td>@us</td>
+                            <td>@eu</td>
+                            <td>@cm</td>
+                        </tr>
+                        }
+                        @*@for (float i = 3; i <= 15; i += 0.5f)
+                        {
+                            <tr>
+                                <td>@i</td>
+                            </tr>
+                        }
+                        @for (float i = 35; i <= 47; i += 0.5f)
+                        {
+                            <tr>
+                                <td>@i</td>
+                            </tr>
+                        }
+                        @for (float i = 22; i <= 33; i += 0.5f)
+                        {
+                            <tr>
+                                <td>@i</td>
+                            </tr>
+                        }*@
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

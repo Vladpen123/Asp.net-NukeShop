@@ -1,0 +1,18 @@
+﻿@model ManufacturerViewModel
+
+@{ 
+    Layout = "_AdminLayout";
+}
+
+<form asp-action="EditManufacturer" method="post">
+    <div class="form-group" asp-validation-summary="All">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+
+        <label asp-for="Name">Название</label>
+        <input asp-for="Name" class="form-control" placeholder="Название" />
+
+    </div>
+    <button type="submit" class="btn btn-primary">Изменить производителя</button>
+</form>
+
